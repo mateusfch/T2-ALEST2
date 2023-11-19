@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class EdgeWeightedDigraph extends EdgeWeightedGraph {
 
   public EdgeWeightedDigraph() {
@@ -8,21 +11,19 @@ public class EdgeWeightedDigraph extends EdgeWeightedGraph {
     super(filename);
   }
 
-  public long contaHidrogenios(String v) {
-    if (v.equals("hidrogenio")) {
-      return 1;
+  public BigInteger contaHidrogenios(String v) {
+    if (v.equals("ouro")) {
+      return BigInteger.ONE;
     }
 
-    long totalHidrogenios = 0;
+    BigInteger totalHidrogenios = BigInteger.ZERO;
 
     for (Edge w : this.getAdj(v)) {
-      System.out.println(w);
 
-      long filhos = (long) (w.getWeight() * contaHidrogenios(w.getW()));
-      totalHidrogenios += filhos;
+      BigInteger filhos = BigDecimal.valueOf(w.getWeight()).toBigInteger().multiply(contaHidrogenios(w.getW()));
+      totalHidrogenios = totalHidrogenios.add(filhos);
     }
 
-    System.out.println();
     return totalHidrogenios;
   }
 
